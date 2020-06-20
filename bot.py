@@ -15,7 +15,7 @@ async def on_message(message):
         return
 
     if message.content.startswith('_hein'):
-        msg = ':heeee: :eeee: :eeee: :eeee: :ein:'.format(message)
+        msg = '<:heeee:723830564104437841> <:eeee:723833827390128140> <:eeee:723833827390128140> <:eeee:723833827390128140> <:ein:723833854703697921>'.format(message)
         await message.channel.send(msg)
 
 
