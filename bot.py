@@ -20,7 +20,7 @@ async def on_message(message):
         await message.channel.send(msg)
 
     if message.content.startswith('$n!'):
-        message.author.display_name = message.author.name
+        await message.author.edit(nick = message.author.name)
 
 
 @client.event
