@@ -16,7 +16,11 @@ async def on_message(message):
 
     if message.content.startswith('_hein'):
         msg = '<:heeee:723830564104437841> <:eeee:723833827390128140> <:eeee:723833827390128140> <:eeee:723833827390128140> <:ein:723833854703697921>'.format(message)
+        message.delete()
         await message.channel.send(msg)
+
+    if message.content.startswith('$n!'):
+        message.author.display_name = message.author.name
 
 
 @client.event
