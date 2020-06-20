@@ -19,10 +19,6 @@ async def on_message(message):
         message.delete()
         await message.channel.send(msg)
 
-    if message.content.startswith('$n!'):
-        await message.author.edit(nick = message.author.name)
-
-
 @client.event
 async def on_ready():
     print('Logged in as')
