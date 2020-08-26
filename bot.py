@@ -1,10 +1,9 @@
 # bot.py
-import os
-import asyncio
+import rldata
 
-import discord
 
-TOKEN = 'NzIzODM2OTExMDE3Mzk0MjM4.Xu3b3w.k4vavWFI3OxXMUsc1Hdv7BOXcUo'
+TOKEN = 'NzIzODM2OTExMDE3Mzk0MjM4.Xu3bpw.Cxd6LXleugMCEUwToWk-ZrhwqtI'
+'
 
 client = discord.Client()
 
@@ -18,6 +17,9 @@ async def on_message(message):
         msg = '<:heeee:723830564104437841> <:eeee:723833827390128140> <:eeee:723833827390128140> <:eeee:723833827390128140> <:ein:723833854703697921>'.format(message)
         message.delete()
         await message.channel.send(msg)
+
+    if message.content.startswith('_rl'):
+        rldata.test(message)
 
 @client.event
 async def on_ready():
