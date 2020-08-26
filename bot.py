@@ -3,7 +3,6 @@ import rldata
 
 
 TOKEN = 'NzIzODM2OTExMDE3Mzk0MjM4.Xu3bpw.Cxd6LXleugMCEUwToWk-ZrhwqtI'
-'
 
 client = discord.Client()
 
