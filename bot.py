@@ -1,5 +1,8 @@
 # bot.py
 import rldata
+import discord
+import os
+import asyncio
 
 
 TOKEN = 'NzIzODM2OTExMDE3Mzk0MjM4.Xu3bpw.Cxd6LXleugMCEUwToWk-ZrhwqtI'
