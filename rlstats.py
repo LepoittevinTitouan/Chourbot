@@ -7,7 +7,7 @@ import discord
 import os
 import asyncio
 
-def test(message) :
+def test(message,guild) :
     if message.attachments :
         data = pd.read_csv(message.attachments[0].url)
         print(data)
