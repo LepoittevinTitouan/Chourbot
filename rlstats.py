@@ -128,7 +128,7 @@ async def plot3s(data,message):
     gs = fig.add_gridspec(nrows=7, ncols=6)
     # Add an empty axes that occupied the whole first row
     axTitle = fig.add_subplot(gs[0,:])
-    axTitle.annotate('3s Data',(0.5,0.5),
+    axTitle.text('3s Data',(0.5,0.5),
                      xycoords='axes fraction', va='center', ha='center')
     axTitle.get_xaxis().set_visible(False)
     axTitle.get_yaxis().set_visible(False)
@@ -140,7 +140,7 @@ async def plot3s(data,message):
     # Annotation fluctuation
     axFlucPos = fig.add_subplot(gs[1,4:6])
     toShowPositiveMMR = "MMR total gagné : " + str(mmrwin)
-    axFlucPos.annotate(toShowPositiveMMR,(0.5,0.5),
+    axFlucPos.text(toShowPositiveMMR,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
     axFlucPos.get_xaxis().set_visible(False)
     axFlucPos.get_yaxis().set_visible(False)
@@ -148,7 +148,7 @@ async def plot3s(data,message):
     # Annotation fluctuation
     axFlucNeg = fig.add_subplot(gs[2,4:6])
     toShowNegativeMMR = "MMR total perdu : " + str(mmrloose)
-    axFlucNeg.annotate(toShowNegativeMMR,(0.5,0.5),
+    axFlucNeg.text(toShowNegativeMMR,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
     axFlucNeg.get_xaxis().set_visible(False)
     axFlucNeg.get_yaxis().set_visible(False)
@@ -161,7 +161,7 @@ async def plot3s(data,message):
     # Annotation Winrate
     axWinrate = fig.add_subplot(gs[3,2:4])
     winrateper = str(int(winrate)) + "%"
-    axWinrate.annotate(winrateper,(0.5,0.5),
+    axWinrate.text(winrateper,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
     axWinrate.get_xaxis().set_visible(False)
     axWinrate.get_yaxis().set_visible(False)
@@ -169,14 +169,14 @@ async def plot3s(data,message):
     # Annotation win & loose
     axWin = fig.add_subplot(gs[4,2])
     winNb = str(win) + "\nWins"
-    axWin.annotate(winNb,(0.5,0.5),
+    axWin.text(winNb,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
     axWin.get_xaxis().set_visible(False)
     axWin.get_yaxis().set_visible(False)
 
     axLoose = fig.add_subplot(gs[4,3])
     loosNb = str(loose) + "\nLooses"
-    axLoose.annotate(loosNb,(0.5,0.5),
+    axLoose.text(loosNb,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
     axLoose.get_xaxis().set_visible(False)
     axLoose.get_yaxis().set_visible(False)
@@ -184,7 +184,7 @@ async def plot3s(data,message):
     # Annotation nb de parties
     axNb = fig.add_subplot(gs[3:5,4:6])
     nbParties = str(nb) + "\nParties jouées"
-    axNb.annotate(nbParties,(0.5,0.5),
+    axNb.text(nbParties,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
     axNb.get_xaxis().set_visible(False)
     axNb.get_yaxis().set_visible(False)
