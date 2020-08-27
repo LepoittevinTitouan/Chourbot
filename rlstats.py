@@ -26,7 +26,7 @@ async def test(message,guild) :
         except IOError as e:
             print(e)
 
-    if  data :
+    if  not data.empty :
         data["Index"] = np.arange(len(data))
 
         fig = plt.figure()
