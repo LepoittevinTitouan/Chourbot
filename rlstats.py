@@ -8,7 +8,7 @@ import os
 import asyncio
 from urllib.request import Request, urlopen
 
-def test(message,guild) :
+async def test(message,guild) :
     if message.attachments :
         req = Request(message.attachments[0].url)
         req.add_header('User-Agent', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:77.0) Gecko/20100101 Firefox/77.0')

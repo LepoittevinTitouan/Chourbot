@@ -252,4 +252,4 @@ async def help(message,guild):
     await message.channel.send(content=msg)
 
 async def stats(message,guild):
-    rlstats.test(message,guild)
+    await rlstats.test(message,guild)
