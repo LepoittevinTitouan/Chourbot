@@ -86,7 +86,7 @@ async def plot3s(data,message):
     mmrwin = 0
     mmrloose = 0
     prec = 0
-    for i in mmr :
+    for i in mmr3s :
         if not prec :
             prec = i
         elif i > prec :
