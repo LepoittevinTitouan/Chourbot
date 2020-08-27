@@ -135,18 +135,23 @@ async def plot3s(data,message):
 
     # Plot principal
     axPrincipal = fig.add_subplot(gs[1:3,0:4])
+    line1, = axPrincipal.plot(mmr3s,label = "3s")
 
     # Annotation fluctuation
     axFlucPos = fig.add_subplot(gs[1,4:6])
     toShowPositiveMMR = "MMR total gagné : " + str(mmrwin)
     axFlucPos.annotate(toShowPositiveMMR,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
+    axFlucPos.get_xaxis().set_visible(False)
+    axFlucPos.get_yaxis().set_visible(False)
 
     # Annotation fluctuation
     axFlucNeg = fig.add_subplot(gs[2,4:6])
     toShowNegativeMMR = "MMR total perdu : " + str(mmrloose)
     axFlucNeg.annotate(toShowNegativeMMR,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
+    axFlucNeg.get_xaxis().set_visible(False)
+    axFlucNeg.get_yaxis().set_visible(False)
 
     # Pie chart
     axPie = fig.add_subplot(gs[3:5,0:2])
@@ -158,18 +163,36 @@ async def plot3s(data,message):
     winrateper = str(winrate) + "%"
     axWinrate.annotate(winrateper,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
+    axWinrate.get_xaxis().set_visible(False)
+    axWinrate.get_yaxis().set_visible(False)
 
     # Annotation win & loose
     axWin = fig.add_subplot(gs[4,2])
     winNb = str(win) + "\nWins"
     axWin.annotate(winNb,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
+    axWin.get_xaxis().set_visible(False)
+    axWin.get_yaxis().set_visible(False)
 
     axLoose = fig.add_subplot(gs[4,3])
     loosNb = str(loose) + "\nLooses"
     axLoose.annotate(loosNb,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
+    axLoose.get_xaxis().set_visible(False)
+    axLoose.get_yaxis().set_visible(False)
 
+    # Annotation nb de parties
+    axNb = fig.add_subplot(gs[3:5,4:6])
+    nbParties = str(nb) + "\nParties jouées"
+    axNb.annotate(nbParties,(0.5,0.5),
+                  xycoords='axes fraction',va='center',ha='center')
+    axNb.get_xaxis().set_visible(False)
+    axNb.get_yaxis().set_visible(False)
+
+
+
+
+    # Saving and sending the file
     fig.savefig('fig1.png')
 
     file = discord.File('fig1.png')
