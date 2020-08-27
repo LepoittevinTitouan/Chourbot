@@ -27,15 +27,20 @@ async def test(message,guild) :
             print(e)
 
     if  not data.empty :
+        # Correcting the DataFrame
         data["Index"] = np.arange(len(data))
+        data["Timestamp"] = pd.to_datetime(data["Timestamp"])
+        data["Weekday"] = data["Timestamp"].dt.day_name()
 
         fig = plt.figure()
         ax = plt.axes()
 
         y = data.loc[data["Playlist"] == "Standard"]
+        y = y.loc[y["MMR"] > 200]
         y = y["MMR"].tolist()
 
         y2 = data.loc[data["Playlist"] == "Doubles"]
+        y2 = y2.loc[y2["MMR"] > 200]
         y2 = y2["MMR"].tolist()
 
         ax.set_xlabel('Nombre de parties')
