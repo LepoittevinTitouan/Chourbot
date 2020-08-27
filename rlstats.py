@@ -8,5 +8,8 @@ import os
 import asyncio
 
 def test(message) :
-    data = pd.read_csv(message.attachments[0].url)
-    print(data)
+    if message.attachments :
+        data = pd.read_csv(message.attachments[0].url)
+        print(data)
+    else :
+        print ("no attachment")
