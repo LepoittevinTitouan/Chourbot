@@ -34,34 +34,34 @@ async def call(message,guild) :
 
         await plot3s(data,message)
 
-        fig = plt.figure()
-        ax = plt.axes()
+        # fig = plt.figure()
+        # ax = plt.axes()
+        #
+        # y = data.loc[data["Playlist"] == "Standard"]
+        # y = y.loc[y["MMR"] > 200]
+        # y = y["MMR"].tolist()
+        #
+        # y2 = data.loc[data["Playlist"] == "Doubles"]
+        # y2 = y2.loc[y2["MMR"] > 200]
+        # y2 = y2["MMR"].tolist()
+        #
+        # ax.set_xlabel('Nombre de parties')
+        # ax.set_ylabel('MMR')
+        # ax.tick_params(axis='y')
+        #
+        # line1, = ax.plot(y, label = "3s",zorder = 10,color = "red")
+        # line2, = ax.plot(y2, label = "2s")
+        #
+        # fig.tight_layout()
+        #
+        # ax.legend()
 
-        y = data.loc[data["Playlist"] == "Standard"]
-        y = y.loc[y["MMR"] > 200]
-        y = y["MMR"].tolist()
-
-        y2 = data.loc[data["Playlist"] == "Doubles"]
-        y2 = y2.loc[y2["MMR"] > 200]
-        y2 = y2["MMR"].tolist()
-
-        ax.set_xlabel('Nombre de parties')
-        ax.set_ylabel('MMR')
-        ax.tick_params(axis='y')
-
-        line1, = ax.plot(y, label = "3s",zorder = 10,color = "red")
-        line2, = ax.plot(y2, label = "2s")
-
-        fig.tight_layout()
-
-        ax.legend()
-
-        fig.savefig('fig1.png')
-
-        file = discord.File('fig1.png')
-        embed = discord.Embed()
-        embed.set_image(url="attachment://fig1.png")
-        await message.channel.send(file=file,embed=embed)
+        # fig.savefig('fig1.png')
+        #
+        # file = discord.File('fig1.png')
+        # embed = discord.Embed()
+        # embed.set_image(url="attachment://fig1.png")
+        # await message.channel.send(file=file,embed=embed)
 
 async def plot3s(data,message):
 
@@ -169,3 +169,10 @@ async def plot3s(data,message):
     loosNb = str(loose) + "\nLooses"
     axLoose.annotate(loosNb,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
+
+    fig.savefig('fig1.png')
+
+    file = discord.File('fig1.png')
+    embed = discord.Embed()
+    embed.set_image(url="attachment://fig1.png")
+    await message.channel.send(file=file,embed=embed)
