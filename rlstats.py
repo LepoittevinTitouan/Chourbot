@@ -15,5 +15,8 @@ def test(message,guild) :
         content = urlopen(req)
         data = pd.read_csv(content)
         user = message.author
+        filename = str(user) + '.csv'
+        data.to_csv(filename)
+        print("\nSaved file " + filename +" !")
     else :
         print (message.author)
