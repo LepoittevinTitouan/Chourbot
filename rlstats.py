@@ -160,7 +160,7 @@ async def plot3s(data,message):
 
     # Annotation Winrate
     axWinrate = fig.add_subplot(gs[3,2:4])
-    winrateper = str(winrate) + "%"
+    winrateper = str(int(winrate)) + "%"
     axWinrate.annotate(winrateper,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
     axWinrate.get_xaxis().set_visible(False)
