@@ -134,27 +134,27 @@ async def plot3s(data,message):
     axTitle.get_yaxis().set_visible(False)
 
     # Plot principal
-    axPrincipal = fig.add_subplot(gs[1:2,0:3])
+    axPrincipal = fig.add_subplot(gs[1:3,0:4])
 
     # Annotation fluctuation
-    axFlucPos = fig.add_subplot(gs[1,4:5])
+    axFlucPos = fig.add_subplot(gs[1,4:6])
     toShowPositiveMMR = "MMR total gagné : " + str(mmrwin)
     axFlucPos.annotate(toShowPositiveMMR,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
 
     # Annotation fluctuation
-    axFlucNeg = fig.add_subplot(gs[2,4:5])
+    axFlucNeg = fig.add_subplot(gs[2,4:6])
     toShowNegativeMMR = "MMR total perdu : " + str(mmrloose)
     axFlucNeg.annotate(toShowNegativeMMR,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
 
     # Pie chart
-    axPie = fig.add_subplot(gs[3:4,0:1])
+    axPie = fig.add_subplot(gs[3:5,0:2])
     axPie.pie(sizes,labels=labels,autopct='%1.1f%%')
     axPie.axis('equal')
 
     # Annotation Winrate
-    axWinrate = fig.add_subplot(gs[3,2:3])
+    axWinrate = fig.add_subplot(gs[3,2:4])
     winrateper = str(winrate) + "%"
     axWinrate.annotate(winrateper,(0.5,0.5),
                   xycoords='axes fraction',va='center',ha='center')
