@@ -188,11 +188,11 @@ async def plot3s(data,message):
 
     # Affichage %MVP
     axMVP = fig.add_subplot(gs[5:7,0:3])
-    axMVP.barh([0,1],[100, 100],color = "grey")
-    axMVP.barh([0,1],[mvpMeanWin, mvpMean],color = "blue")
+    axMVP.barh([0,1],[100, 100],color = "grey",width = 0.4)
+    axMVP.barh([0,1],[mvpMeanWin, mvpMean],color = "blue",width = 0.4)
     axMVP.get_xaxis().set_visible(False)
     plt.sca(axMVP)
-    plt.yticks([0,1],labels=["%mvp\ntotal","%mvp\nwin"])
+    plt.yticks([0,1],labels=["mvp\nwin","mvp\ntotal games"])
 
     #Emplacement annotations : x = 75 et y = 1 et 0
     axMVP.annotate(str(int(mvpMean)) + " %", (75,1),va='center',ha='center')
