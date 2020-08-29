@@ -156,7 +156,7 @@ async def plot3s(data,message):
 
     # Pie chart
     axPie = fig.add_subplot(gs[3:5,0:2])
-    axPie.pie(sizes,labels=labels,autopct='%1.1f%%')
+    axPie.pie(sizes,labels=labels,autopct='%f%%')
     axPie.axis('equal')
 
     # Annotation Winrate
