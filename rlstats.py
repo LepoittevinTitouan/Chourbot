@@ -156,7 +156,7 @@ async def plot3s(data,message):
 
     # Pie chart
     axPie = fig.add_subplot(gs[3:5,0:2])
-    axPie.pie(sizes,labels=labels,autopct='%f%%')
+    axPie.pie(sizes,labels=labels,autopct='%1.1f%%')
     axPie.axis('equal')
 
     # Annotation Winrate
@@ -191,7 +191,6 @@ async def plot3s(data,message):
     axMVP.barh([0,1],[100, 100],color = "grey")
     axMVP.barh([0,1],[mvpMeanWin, mvpMean],color = "blue")
     axMVP.get_xaxis().set_visible(False)
-    axMVP.get_yaxis().set_visible(False)
 
     #Emplacement annotations : x = 75 et y = 1 et 0
     axMVP.annotate(str(int(mvpMean)) + " %", (75,1),va='center',ha='center')
