@@ -71,6 +71,10 @@ async def plot3s(data,message):
     data = data.loc[data["Ranked"] == 1]
     data.tail(50)
 
+    if data.empty :
+        await message.channel.send("No game played in 3s in " + str(message.author) + "' saved file.")
+        return
+
     #Selection du MMR avec exclusion des buggés
     mmr3s = data.loc[data["MMR"] > 200]
     mmr3s = mmr3s["MMR"].tolist()
@@ -164,25 +168,36 @@ async def plot3s(data,message):
 
     # Annotation win & loose
     axWin = fig.add_subplot(gs[4,2])
-    winNb = str(win) + "\nWins"
+    winNb = str(int(win)) + "\nWins"
     axWin.text(0.5,0.5,winNb,va='center',ha='center')
     axWin.get_xaxis().set_visible(False)
     axWin.get_yaxis().set_visible(False)
 
     axLoose = fig.add_subplot(gs[4,3])
-    loosNb = str(loose) + "\nLooses"
+    loosNb = str(int(loose)) + "\nLooses"
     axLoose.text(0.5,0.5,loosNb,va='center',ha='center')
     axLoose.get_xaxis().set_visible(False)
     axLoose.get_yaxis().set_visible(False)
 
     # Annotation nb de parties
     axNb = fig.add_subplot(gs[3:5,4:6])
-    nbParties = str(nb) + "\nParties jouées"
+    nbParties = str(int(nb)) + "\nParties jouées"
     axNb.text(0.5,0.5,nbParties,va='center',ha='center')
     axNb.get_xaxis().set_visible(False)
     axNb.get_yaxis().set_visible(False)
 
+    # Affichage %MVP
+    axMVP = fig.add_subplot(gs[5:7,0:3])
+    axMVP.barh([0,1],[100, 100],color = "grey")
+    axMVP.barh([0,1],[mvpMeanWin, mvpMean],color = "blue")
+    axMVP.get_xaxis().set_visible(False)
+    axMVP.get_yaxis().set_visible(False)
 
+    #Emplacement annotations : x = 75 et y = 1 et 0
+    axMVP.annotate(str(int(mvpMean)) + " %", (75,1),va='center',ha='center')
+    axMVP.annotate(str(int(mvpMeanWin)) + " %",(75,0),va='center',ha='center')
+
+    plt.show()
 
 
     # Saving and sending the file
