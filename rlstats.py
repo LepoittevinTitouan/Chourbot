@@ -191,6 +191,7 @@ async def plot3s(data,message):
     axMVP.barh([0,1],[100, 100],color = "grey")
     axMVP.barh([0,1],[mvpMeanWin, mvpMean],color = "blue")
     axMVP.get_xaxis().set_visible(False)
+    axMVP.yticks([0,1],labels=["%mvp\ntotal","%mvp\nwin"])
 
     #Emplacement annotations : x = 75 et y = 1 et 0
     axMVP.annotate(str(int(mvpMean)) + " %", (75,1),va='center',ha='center')
