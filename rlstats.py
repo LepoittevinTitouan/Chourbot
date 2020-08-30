@@ -32,8 +32,12 @@ async def call(message,guild) :
         data["Timestamp"] = pd.to_datetime(data["Timestamp"])
         data["Weekday"] = data["Timestamp"].dt.day_name()
 
-        await plot3s(data,message)
-
+        if "3s" in message.content :
+            await plot3s(data,message)
+        elif "2s" in message.content :
+            await plot2s(data,message)
+        else :
+            await message.channel.send("Spécifier le mode de jeu : '2s' où '3s'.")
         # fig = plt.figure()
         # ax = plt.axes()
         #
@@ -139,6 +143,152 @@ async def plot3s(data,message):
     # Plot principal
     axPrincipal = fig.add_subplot(gs[1:3,0:4])
     line1, = axPrincipal.plot(mmr3s,label = "3s")
+
+    # Annotation fluctuation
+    axFlucPos = fig.add_subplot(gs[1,4:6])
+    toShowPositiveMMR = "MMR total gagné : " + str(mmrwin)
+    axFlucPos.text(0.5,0.5,toShowPositiveMMR,va='center',ha='center')
+    axFlucPos.get_xaxis().set_visible(False)
+    axFlucPos.get_yaxis().set_visible(False)
+
+    # Annotation fluctuation
+    axFlucNeg = fig.add_subplot(gs[2,4:6])
+    toShowNegativeMMR = "MMR total perdu : " + str(mmrloose)
+    axFlucNeg.text(0.5,0.5,toShowNegativeMMR,va='center',ha='center')
+    axFlucNeg.get_xaxis().set_visible(False)
+    axFlucNeg.get_yaxis().set_visible(False)
+
+    # Pie chart
+    axPie = fig.add_subplot(gs[3:5,0:2])
+    axPie.pie(sizes,labels=labels,autopct='%1.1f%%')
+    axPie.axis('equal')
+
+    # Annotation Winrate
+    axWinrate = fig.add_subplot(gs[3,2:4])
+    winrateper = str(int(winrate)) + "%"
+    axWinrate.text(0.5,0.5,winrateper,va='center',ha='center')
+    axWinrate.get_xaxis().set_visible(False)
+    axWinrate.get_yaxis().set_visible(False)
+
+    # Annotation win & loose
+    axWin = fig.add_subplot(gs[4,2])
+    winNb = str(int(win)) + "\nWins"
+    axWin.text(0.5,0.5,winNb,va='center',ha='center')
+    axWin.get_xaxis().set_visible(False)
+    axWin.get_yaxis().set_visible(False)
+
+    axLoose = fig.add_subplot(gs[4,3])
+    loosNb = str(int(loose)) + "\nLooses"
+    axLoose.text(0.5,0.5,loosNb,va='center',ha='center')
+    axLoose.get_xaxis().set_visible(False)
+    axLoose.get_yaxis().set_visible(False)
+
+    # Annotation nb de parties
+    axNb = fig.add_subplot(gs[3:5,4:6])
+    nbParties = str(int(nb)) + "\nParties jouées"
+    axNb.text(0.5,0.5,nbParties,va='center',ha='center')
+    axNb.get_xaxis().set_visible(False)
+    axNb.get_yaxis().set_visible(False)
+
+    # Affichage %MVP
+    axMVP = fig.add_subplot(gs[5:7,0:3])
+    axMVP.barh([0,1],[100, 100],color = "grey")
+    axMVP.barh([0,1],[mvpMeanWin, mvpMean],color = "blue")
+    axMVP.get_xaxis().set_visible(False)
+    plt.sca(axMVP)
+    plt.yticks([0,1],labels=["mvp\nwin","mvp\ntotal games"])
+
+    #Emplacement annotations : x = 75 et y = 1 et 0
+    axMVP.annotate(str(int(mvpMean)) + " %", (75,1),va='center',ha='center')
+    axMVP.annotate(str(int(mvpMeanWin)) + " %",(75,0),va='center',ha='center')
+
+    plt.show()
+
+
+    # Saving and sending the file
+    fig.savefig('fig1.png')
+
+    file = discord.File('fig1.png')
+    embed = discord.Embed()
+    embed.set_image(url="attachment://fig1.png")
+    await message.channel.send(file=file,embed=embed)
+
+async def plot2s(data,message):
+
+    #Traitement données :
+    #Limitation du nombre de données
+    data = data.loc[data["Playlist"] == "Doubles"]
+    data = data.loc[data["Ranked"] == 1]
+    data.tail(50)
+
+    if data.empty :
+        await message.channel.send("No game played in 2s in " + str(message.author) + "' saved file.")
+        return
+
+    #Selection du MMR avec exclusion des buggés
+    mmr2s = data.loc[data["MMR"] > 200]
+    mmr2s = mmr2s["MMR"].tolist()
+
+    #Selection du score
+    score = data["Score"].tolist()
+    scoremean = data["Score"].mean()
+
+    #Selection des MVP
+    mvp = data["MVP"].tolist()
+
+    #Fluctuation du MMR
+    mmrwin = 0
+    mmrloose = 0
+    prec = 0
+    for i in mmr2s :
+        if not prec :
+            prec = i
+        elif i > prec :
+            mmrwin = mmrwin + (i - prec)
+            prec = i
+        elif i < prec :
+            mmrloose = mmrloose + ( prec - i )
+            prec = i
+        else :
+            prec = 1
+
+    #Préparation du pie chart
+    labels = 'Goals','Saves','Assists'
+    sizes =[]
+    for l in labels :
+        myList = data[l].tolist()
+        total = sum(myList)
+        sizes.append(total)
+
+    # Winrate + win/loose
+    winrate = data["Win"].mean()
+    winrate = winrate * 100
+    win = data["Win"].sum()
+    loose = (win * 100 / winrate) - win
+    nb = win + loose
+
+    #Affichage %MVP
+    mvpMean = data["MVP"].mean()
+    mvpMean = mvpMean * 100
+    mvpMeanWin = data.loc[data["Win"] == 1]
+    mvpMeanWin = mvpMeanWin["MVP"].mean()
+    mvpMeanWin = mvpMeanWin * 100
+
+
+    plt.rc('figure',facecolor='w')
+    fig = plt.figure(constrained_layout = True)
+
+    # Use GridSpec for customising layout
+    gs = fig.add_gridspec(nrows=7, ncols=6)
+    # Add an empty axes that occupied the whole first row
+    axTitle = fig.add_subplot(gs[0,:])
+    axTitle.text(0.5,0.5,'2s Data',va='center', ha='center')
+    axTitle.get_xaxis().set_visible(False)
+    axTitle.get_yaxis().set_visible(False)
+
+    # Plot principal
+    axPrincipal = fig.add_subplot(gs[1:3,0:4])
+    line1, = axPrincipal.plot(mmr2s,label = "3s")
 
     # Annotation fluctuation
     axFlucPos = fig.add_subplot(gs[1,4:6])
