@@ -115,16 +115,14 @@ async def plot3s(data,message):
 
 
     # -- PLOT --
-    plt.rc('figure',facecolor='w')
+    plt.rc('figure',facecolor='xkcd:greyblue')
     fig = plt.figure(constrained_layout = True)
-
     # Use GridSpec for customising layout
     gs = fig.add_gridspec(nrows=7, ncols=6)
     # Add an empty axes that occupied the whole first row
     axTitle = fig.add_subplot(gs[0,:])
     axTitle.text(0.5,0.5,'3s Data',va='center', ha='center')
-    axTitle.get_xaxis().set_visible(False)
-    axTitle.get_yaxis().set_visible(False)
+    axTitle.axis("off")
 
     # Plot principal
     axPrincipal = fig.add_subplot(gs[1:3,0:4])
@@ -144,12 +142,12 @@ async def plot3s(data,message):
 
     # Pie chart
     axPie = fig.add_subplot(gs[3:5,0:2])
-    axPie.pie(sizes,labels=labels,autopct='%1.1f%%')
+    axPie.pie(sizes,labels=labels,autopct='%d%%')
     axPie.axis('equal')
 
     # Annotation Winrate
     axWinrate = fig.add_subplot(gs[3,2:4])
-    winrateper = str(int(winrate)) + "%"
+    winrateper = "Winrate :\n" + str(int(winrate)) + "%"
     axWinrate.text(0.5,0.5,winrateper,va='center',ha='center')
     axWinrate.axis("off")
 
