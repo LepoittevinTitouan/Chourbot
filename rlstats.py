@@ -103,9 +103,7 @@ async def plot3s(data,message):
     #Best day & best hour
     days = data.groupby("Weekday").mean()
     bDay = days["Win"].argmax()
-    days.reset_index()
-    days = days.loc[days["Weekday"] == bDay]
-    bDayWinrate = days["Win"]
+    bDayWinrate = days["Win"].max()
 
     plt.rc('figure',facecolor='w')
     fig = plt.figure(constrained_layout = True)
