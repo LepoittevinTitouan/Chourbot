@@ -37,7 +37,6 @@ async def call(message,guild) :
         elif "2s" in message.content :
             await plot2s(data,message)
         else :
-            await message.channel.send("Spécifier le mode de jeu : '2s' où '3s'.")
             await plotRecap(data,message)
 
 async def plotRecap(data,message):
@@ -48,11 +47,11 @@ async def plotRecap(data,message):
         return
 
     mmr3s = data.loc[data["Playlist"] == "Standard"]
-    mmr3s = data.loc[data["MMR"] > 200]
+    mmr3s = mmr3s.loc[mmr3s["MMR"] > 200]
     mmr3s = mmr3s["MMR"].tolist()
 
     mmr2s = data.loc[data["Playlist"] == "Doubles"]
-    mmr2s = data.loc[data["MMR"] > 200]
+    mmr2s = mmr2s.loc[mmr2s["MMR"] > 200]
     mmr2s = mmr2s["MMR"].tolist()
 
     fig = plt.figure()
