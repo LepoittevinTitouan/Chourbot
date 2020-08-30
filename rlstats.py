@@ -259,79 +259,95 @@ async def plot2s(data,message):
     mvpMeanWin = mvpMeanWin["MVP"].mean()
     mvpMeanWin = mvpMeanWin * 100
 
+    #Best day & best hour
+    days = data.groupby("Weekday").mean()
+    bDay = days["Win"].idxmax()
+    bDayWinrate = days["Win"].max()
+    bDayWinrate = bDayWinrate * 100
 
-    plt.rc('figure',facecolor='w')
+    data["Rounded"] = data["Timestamp"].dt.round('H')
+    data["Rounded"] = data["Rounded"].dt.time
+    hours = data.groupby("Rounded").mean()
+    bHour = hours["Win"].idxmax()
+    bHourWinrate = hours["Win"].max()
+    bHourWinrate = bHourWinrate * 100
+
+
+    # -- PLOT --
+    plt.rc('figure',facecolor='xkcd:greyblue')
     fig = plt.figure(constrained_layout = True)
-
     # Use GridSpec for customising layout
     gs = fig.add_gridspec(nrows=7, ncols=6)
     # Add an empty axes that occupied the whole first row
     axTitle = fig.add_subplot(gs[0,:])
     axTitle.text(0.5,0.5,'2s Data',va='center', ha='center')
-    axTitle.get_xaxis().set_visible(False)
-    axTitle.get_yaxis().set_visible(False)
+    axTitle.axis("off")
 
     # Plot principal
     axPrincipal = fig.add_subplot(gs[1:3,0:4])
-    line1, = axPrincipal.plot(mmr2s,label = "3s")
+    line1, = axPrincipal.plot(mmr2s,label = "2s")
 
     # Annotation fluctuation
     axFlucPos = fig.add_subplot(gs[1,4:6])
     toShowPositiveMMR = "MMR total gagné :\n" + str(mmrwin)
     axFlucPos.text(0.5,0.5,toShowPositiveMMR,va='center',ha='center')
-    axFlucPos.get_xaxis().set_visible(False)
-    axFlucPos.get_yaxis().set_visible(False)
+    axFlucPos.axis("off")
 
     # Annotation fluctuation
     axFlucNeg = fig.add_subplot(gs[2,4:6])
     toShowNegativeMMR = "MMR total perdu :\n" + str(mmrloose)
     axFlucNeg.text(0.5,0.5,toShowNegativeMMR,va='center',ha='center')
-    axFlucNeg.get_xaxis().set_visible(False)
-    axFlucNeg.get_yaxis().set_visible(False)
+    axFlucNeg.axis("off")
 
     # Pie chart
     axPie = fig.add_subplot(gs[3:5,0:2])
-    axPie.pie(sizes,labels=labels,autopct='%1.1f%%')
+    axPie.pie(sizes,labels=labels,autopct='%d%%')
     axPie.axis('equal')
 
     # Annotation Winrate
     axWinrate = fig.add_subplot(gs[3,2:4])
-    winrateper = str(int(winrate)) + "%"
+    winrateper = "Winrate :\n" + str(int(winrate)) + "%"
     axWinrate.text(0.5,0.5,winrateper,va='center',ha='center')
-    axWinrate.get_xaxis().set_visible(False)
-    axWinrate.get_yaxis().set_visible(False)
+    axWinrate.axis("off")
 
     # Annotation win & loose
     axWin = fig.add_subplot(gs[4,2])
     winNb = str(int(win)) + "\nWins"
     axWin.text(0.5,0.5,winNb,va='center',ha='center')
-    axWin.get_xaxis().set_visible(False)
-    axWin.get_yaxis().set_visible(False)
+    axWin.axis("off")
 
     axLoose = fig.add_subplot(gs[4,3])
     loosNb = str(int(loose)) + "\nLooses"
     axLoose.text(0.5,0.5,loosNb,va='center',ha='center')
-    axLoose.get_xaxis().set_visible(False)
-    axLoose.get_yaxis().set_visible(False)
+    axLoose.axis("off")
 
     # Annotation nb de parties
     axNb = fig.add_subplot(gs[3:5,4:6])
     nbParties = str(int(nb)) + "\nParties jouées"
     axNb.text(0.5,0.5,nbParties,va='center',ha='center')
-    axNb.get_xaxis().set_visible(False)
-    axNb.get_yaxis().set_visible(False)
+    axNb.axis("off")
 
     # Affichage %MVP
-    axMVP = fig.add_subplot(gs[5:7,0:3])
+    axMVP = fig.add_subplot(gs[5:7,0:4])
     axMVP.barh([0,1],[100, 100],color = "grey")
     axMVP.barh([0,1],[mvpMeanWin, mvpMean],color = "blue")
-    axMVP.get_xaxis().set_visible(False)
-    plt.sca(axMVP)
-    plt.yticks([0,1],labels=["mvp\nwin","mvp\ntotal games"])
+    axMVP.axis("off")
 
     #Emplacement annotations : x = 75 et y = 1 et 0
-    axMVP.annotate(str(int(mvpMean)) + " %", (75,1),va='center',ha='center')
-    axMVP.annotate(str(int(mvpMeanWin)) + " %",(75,0),va='center',ha='center')
+    axMVP.annotate(str(int(mvpMean)) + " % of total games", (75,1),va='center',ha='center')
+    axMVP.annotate(str(int(mvpMeanWin)) + " % of total wins",(75,0),va='center',ha='center')
+
+    #Best day
+    axBestDay = fig.add_subplot(gs[5,4:6])
+    bDayString = "Best day :\n" + str(bDay) + " (" + str(int(bDayWinrate)) + "%)"
+    axBestDay.text(0.5,0.5,bDayString,va='center',ha='center')
+    axBestDay.axis("off")
+
+    #Best hour
+    axBestHour = fig.add_subplot(gs[6,4:6])
+    bHourString = "Best hour :\n" + str(bHour) + " (" + str(int(bHourWinrate)) + "%)"
+    axBestHour.text(0.5,0.5,bHourString,va='center',ha='center')
+    axBestHour.axis("off")
 
     # Saving and sending the file
     fig.savefig('fig1.png')
