@@ -38,34 +38,6 @@ async def call(message,guild) :
             await plot2s(data,message)
         else :
             await message.channel.send("Spécifier le mode de jeu : '2s' où '3s'.")
-        # fig = plt.figure()
-        # ax = plt.axes()
-        #
-        # y = data.loc[data["Playlist"] == "Standard"]
-        # y = y.loc[y["MMR"] > 200]
-        # y = y["MMR"].tolist()
-        #
-        # y2 = data.loc[data["Playlist"] == "Doubles"]
-        # y2 = y2.loc[y2["MMR"] > 200]
-        # y2 = y2["MMR"].tolist()
-        #
-        # ax.set_xlabel('Nombre de parties')
-        # ax.set_ylabel('MMR')
-        # ax.tick_params(axis='y')
-        #
-        # line1, = ax.plot(y, label = "3s",zorder = 10,color = "red")
-        # line2, = ax.plot(y2, label = "2s")
-        #
-        # fig.tight_layout()
-        #
-        # ax.legend()
-
-        # fig.savefig('fig1.png')
-        #
-        # file = discord.File('fig1.png')
-        # embed = discord.Embed()
-        # embed.set_image(url="attachment://fig1.png")
-        # await message.channel.send(file=file,embed=embed)
 
 async def plot3s(data,message):
 
@@ -104,7 +76,7 @@ async def plot3s(data,message):
             mmrloose = mmrloose + ( prec - i )
             prec = i
         else :
-            prec = 1
+            prec = i
 
     #Préparation du pie chart
     labels = 'Goals','Saves','Assists'
@@ -128,6 +100,12 @@ async def plot3s(data,message):
     mvpMeanWin = mvpMeanWin["MVP"].mean()
     mvpMeanWin = mvpMeanWin * 100
 
+    #Best day & best hour
+    days = data.groupby("Weekday").mean()
+    bDay = days["Win"].argmax()
+    days.reset_index()
+    days = days.loc[days["Weekday"] == bDay]
+    bDayWinrate = days["Win"]
 
     plt.rc('figure',facecolor='w')
     fig = plt.figure(constrained_layout = True)
@@ -191,7 +169,7 @@ async def plot3s(data,message):
     axNb.get_yaxis().set_visible(False)
 
     # Affichage %MVP
-    axMVP = fig.add_subplot(gs[5:7,0:3])
+    axMVP = fig.add_subplot(gs[5:7,1:4])
     axMVP.barh([0,1],[100, 100],color = "grey")
     axMVP.barh([0,1],[mvpMeanWin, mvpMean],color = "blue")
     axMVP.get_xaxis().set_visible(False)
@@ -202,8 +180,12 @@ async def plot3s(data,message):
     axMVP.annotate(str(int(mvpMean)) + " %", (75,1),va='center',ha='center')
     axMVP.annotate(str(int(mvpMeanWin)) + " %",(75,0),va='center',ha='center')
 
-    plt.show()
-
+    #Best day
+    axBestDay = fig.add_subplot(gs[5,4:6])
+    bDayString = "Best day : " + bDay + " avec " + str(int(bDayWinrate)) + " %"
+    axBestDay.text(0.5,0.5,bDayString,va='center',ha='center')
+    axBestDay.get_xaxis().set_visible(False)
+    axBestDay.get_yaxis().set_visible(False)
 
     # Saving and sending the file
     fig.savefig('fig1.png')
@@ -250,7 +232,7 @@ async def plot2s(data,message):
             mmrloose = mmrloose + ( prec - i )
             prec = i
         else :
-            prec = 1
+            prec = i
 
     #Préparation du pie chart
     labels = 'Goals','Saves','Assists'
@@ -347,9 +329,6 @@ async def plot2s(data,message):
     #Emplacement annotations : x = 75 et y = 1 et 0
     axMVP.annotate(str(int(mvpMean)) + " %", (75,1),va='center',ha='center')
     axMVP.annotate(str(int(mvpMeanWin)) + " %",(75,0),va='center',ha='center')
-
-    plt.show()
-
 
     # Saving and sending the file
     fig.savefig('fig1.png')
