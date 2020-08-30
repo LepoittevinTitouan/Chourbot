@@ -38,6 +38,44 @@ async def call(message,guild) :
             await plot2s(data,message)
         else :
             await message.channel.send("Spécifier le mode de jeu : '2s' où '3s'.")
+            await plotRecap(data,message)
+
+async def plotRecap(data,message):
+
+    data = data.loc[data["Ranked"] == 1]
+    if data.empty :
+        await message.channel.send("No available data in " + str(message.author) + "' saved file.")
+        return
+
+    mmr3s = data.loc[data["Playlist"] == "Standard"]
+    mmr3s = data.loc[data["MMR"] > 200]
+    mmr3s = mmr3s["MMR"].tolist()
+
+    mmr2s = data.loc[data["Playlist"] == "Doubles"]
+    mmr2s = data.loc[data["MMR"] > 200]
+    mmr2s = mmr2s["MMR"].tolist()
+
+    fig = plt.figure()
+    ax = plt.axes()
+
+    ax.set_xlabel('Nombre de parties')
+    ax.set_ylabel('MMR')
+    ax.tick_params(axis='y')
+
+    line1, = ax.plot(mmr3s, label = "3s",zorder = 10,color = "red")
+    line2, = ax.plot(mmr2s, label = "2s")
+
+    fig.tight_layout()
+
+    ax.legend()
+
+    fig.savefig('fig1.png')
+
+    file = discord.File('fig1.png')
+    embed = discord.Embed()
+    embed.set_image(url="attachment://fig1.png")
+    await message.channel.send("Précision en spécifiant '2s' ou '3s' dans la commande !")
+    await message.channel.send(file=file,embed=embed)
 
 async def plot3s(data,message):
 
