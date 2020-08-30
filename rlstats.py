@@ -102,7 +102,7 @@ async def plot3s(data,message):
 
     #Best day & best hour
     days = data.groupby("Weekday").mean()
-    bDay = days["Win"].argmax()
+    bDay = days["Win"].idxmax()
     bDayWinrate = days["Win"].max()
 
     plt.rc('figure',facecolor='w')
@@ -180,7 +180,7 @@ async def plot3s(data,message):
 
     #Best day
     axBestDay = fig.add_subplot(gs[5,4:6])
-    bDayString = "Best day : " + bDay + " avec " + str(int(bDayWinrate)) + " %"
+    bDayString = "Best day : " + str(bDay) + " avec " + str(int(bDayWinrate)) + " %"
     axBestDay.text(0.5,0.5,bDayString,va='center',ha='center')
     axBestDay.get_xaxis().set_visible(False)
     axBestDay.get_yaxis().set_visible(False)
