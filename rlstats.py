@@ -104,6 +104,7 @@ async def plot3s(data,message):
     days = data.groupby("Weekday").mean()
     bDay = days["Win"].idxmax()
     bDayWinrate = days["Win"].max()
+    bDayWinrate = bDayWinrate * 100
 
     plt.rc('figure',facecolor='w')
     fig = plt.figure(constrained_layout = True)
@@ -122,14 +123,14 @@ async def plot3s(data,message):
 
     # Annotation fluctuation
     axFlucPos = fig.add_subplot(gs[1,4:6])
-    toShowPositiveMMR = "MMR total gagné : " + str(mmrwin)
+    toShowPositiveMMR = "MMR total gagné :\n" + str(mmrwin)
     axFlucPos.text(0.5,0.5,toShowPositiveMMR,va='center',ha='center')
     axFlucPos.get_xaxis().set_visible(False)
     axFlucPos.get_yaxis().set_visible(False)
 
     # Annotation fluctuation
     axFlucNeg = fig.add_subplot(gs[2,4:6])
-    toShowNegativeMMR = "MMR total perdu : " + str(mmrloose)
+    toShowNegativeMMR = "MMR total perdu :\n" + str(mmrloose)
     axFlucNeg.text(0.5,0.5,toShowNegativeMMR,va='center',ha='center')
     axFlucNeg.get_xaxis().set_visible(False)
     axFlucNeg.get_yaxis().set_visible(False)
@@ -167,20 +168,19 @@ async def plot3s(data,message):
     axNb.get_yaxis().set_visible(False)
 
     # Affichage %MVP
-    axMVP = fig.add_subplot(gs[5:7,1:4])
+    axMVP = fig.add_subplot(gs[5:7,0:4])
     axMVP.barh([0,1],[100, 100],color = "grey")
     axMVP.barh([0,1],[mvpMeanWin, mvpMean],color = "blue")
     axMVP.get_xaxis().set_visible(False)
-    plt.sca(axMVP)
-    plt.yticks([0,1],labels=["mvp\nwin","mvp\ntotal games"])
+    axMVP.get_yaxis().set_visible(False)
 
     #Emplacement annotations : x = 75 et y = 1 et 0
-    axMVP.annotate(str(int(mvpMean)) + " %", (75,1),va='center',ha='center')
-    axMVP.annotate(str(int(mvpMeanWin)) + " %",(75,0),va='center',ha='center')
+    axMVP.annotate(str(int(mvpMean)) + " % of total games", (75,1),va='center',ha='center')
+    axMVP.annotate(str(int(mvpMeanWin)) + " % of total wins",(75,0),va='center',ha='center')
 
     #Best day
     axBestDay = fig.add_subplot(gs[5,4:6])
-    bDayString = "Best day : " + str(bDay) + " avec " + str(int(bDayWinrate)) + " %"
+    bDayString = "Best day :\n" + str(bDay) + " (" + str(int(bDayWinrate)) + "%)"
     axBestDay.text(0.5,0.5,bDayString,va='center',ha='center')
     axBestDay.get_xaxis().set_visible(False)
     axBestDay.get_yaxis().set_visible(False)
@@ -272,14 +272,14 @@ async def plot2s(data,message):
 
     # Annotation fluctuation
     axFlucPos = fig.add_subplot(gs[1,4:6])
-    toShowPositiveMMR = "MMR total gagné : " + str(mmrwin)
+    toShowPositiveMMR = "MMR total gagné :\n" + str(mmrwin)
     axFlucPos.text(0.5,0.5,toShowPositiveMMR,va='center',ha='center')
     axFlucPos.get_xaxis().set_visible(False)
     axFlucPos.get_yaxis().set_visible(False)
 
     # Annotation fluctuation
     axFlucNeg = fig.add_subplot(gs[2,4:6])
-    toShowNegativeMMR = "MMR total perdu : " + str(mmrloose)
+    toShowNegativeMMR = "MMR total perdu :\n" + str(mmrloose)
     axFlucNeg.text(0.5,0.5,toShowNegativeMMR,va='center',ha='center')
     axFlucNeg.get_xaxis().set_visible(False)
     axFlucNeg.get_yaxis().set_visible(False)
