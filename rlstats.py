@@ -191,18 +191,16 @@ async def plot3s(data,message):
     axBestDay = fig.add_subplot(gs[5,4:6])
     bDayString = "Best day :\n" + str(bDay) + " (" + str(int(bDayWinrate)) + "%)"
     axBestDay.text(0.5,0.5,bDayString,va='center',ha='center')
-    axBestDay.get_xaxis().set_visible(False)
-    axBestDay.get_yaxis().set_visible(False)
+    axBestDay.axis("off")
 
     #Best hour
     axBestHour = fig.add_subplot(gs[6,4:6])
     bHourString = "Best hour :\n" + str(bHour) + " (" + str(int(bHourWinrate)) + "%)"
     axBestHour.text(0.5,0.5,bHourString,va='center',ha='center')
-    axBestHour.get_xaxis().set_visible(False)
-    axBestHour.get_yaxis().set_visible(False)
+    axBestHour.axis("off")
 
     # Saving and sending the file
-    fig.savefig('fig1.png')
+    fig.savefig('fig1.png',Transparent = True)
 
     file = discord.File('fig1.png')
     embed = discord.Embed()
