@@ -134,15 +134,13 @@ async def plot3s(data,message):
     axFlucPos = fig.add_subplot(gs[1,4:6])
     toShowPositiveMMR = "MMR total gagné :\n" + str(mmrwin)
     axFlucPos.text(0.5,0.5,toShowPositiveMMR,va='center',ha='center')
-    axFlucPos.get_xaxis().set_visible(False)
-    axFlucPos.get_yaxis().set_visible(False)
+    axFlucPos.axis("off")
 
     # Annotation fluctuation
     axFlucNeg = fig.add_subplot(gs[2,4:6])
     toShowNegativeMMR = "MMR total perdu :\n" + str(mmrloose)
     axFlucNeg.text(0.5,0.5,toShowNegativeMMR,va='center',ha='center')
-    axFlucNeg.get_xaxis().set_visible(False)
-    axFlucNeg.get_yaxis().set_visible(False)
+    axFlucNeg.axis("off")
 
     # Pie chart
     axPie = fig.add_subplot(gs[3:5,0:2])
@@ -153,35 +151,30 @@ async def plot3s(data,message):
     axWinrate = fig.add_subplot(gs[3,2:4])
     winrateper = str(int(winrate)) + "%"
     axWinrate.text(0.5,0.5,winrateper,va='center',ha='center')
-    axWinrate.get_xaxis().set_visible(False)
-    axWinrate.get_yaxis().set_visible(False)
+    axWinrate.axis("off")
 
     # Annotation win & loose
     axWin = fig.add_subplot(gs[4,2])
     winNb = str(int(win)) + "\nWins"
     axWin.text(0.5,0.5,winNb,va='center',ha='center')
-    axWin.get_xaxis().set_visible(False)
-    axWin.get_yaxis().set_visible(False)
+    axWin.axis("off")
 
     axLoose = fig.add_subplot(gs[4,3])
     loosNb = str(int(loose)) + "\nLooses"
     axLoose.text(0.5,0.5,loosNb,va='center',ha='center')
-    axLoose.get_xaxis().set_visible(False)
-    axLoose.get_yaxis().set_visible(False)
+    axLoose.axis("off")
 
     # Annotation nb de parties
     axNb = fig.add_subplot(gs[3:5,4:6])
     nbParties = str(int(nb)) + "\nParties jouées"
     axNb.text(0.5,0.5,nbParties,va='center',ha='center')
-    axNb.get_xaxis().set_visible(False)
-    axNb.get_yaxis().set_visible(False)
+    axNb.axis("off")
 
     # Affichage %MVP
     axMVP = fig.add_subplot(gs[5:7,0:4])
     axMVP.barh([0,1],[100, 100],color = "grey")
     axMVP.barh([0,1],[mvpMeanWin, mvpMean],color = "blue")
-    axMVP.get_xaxis().set_visible(False)
-    axMVP.get_yaxis().set_visible(False)
+    axMVP.axis("off")
 
     #Emplacement annotations : x = 75 et y = 1 et 0
     axMVP.annotate(str(int(mvpMean)) + " % of total games", (75,1),va='center',ha='center')
@@ -200,7 +193,7 @@ async def plot3s(data,message):
     axBestHour.axis("off")
 
     # Saving and sending the file
-    fig.savefig('fig1.png',Transparent = True)
+    fig.savefig('fig1.png')
 
     file = discord.File('fig1.png')
     embed = discord.Embed()
