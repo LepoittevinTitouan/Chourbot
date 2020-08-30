@@ -106,6 +106,15 @@ async def plot3s(data,message):
     bDayWinrate = days["Win"].max()
     bDayWinrate = bDayWinrate * 100
 
+    data["Rounded"] = data["Timestamp"].dt.round('H')
+    data["Rounded"] = data["Rounded"].dt.time
+    hours = data.groupby("Rounded").mean()
+    bHour = hours["Win"].idxmax()
+    bHourWinrate = hours["Win"].max()
+    bHourWinrate = bHourWinrate * 100
+
+
+    # -- PLOT --
     plt.rc('figure',facecolor='w')
     fig = plt.figure(constrained_layout = True)
 
@@ -184,6 +193,13 @@ async def plot3s(data,message):
     axBestDay.text(0.5,0.5,bDayString,va='center',ha='center')
     axBestDay.get_xaxis().set_visible(False)
     axBestDay.get_yaxis().set_visible(False)
+
+    #Best hour
+    axBestHour = fig.add_subplot(gs[6,4:6])
+    bHourString = "Best hour :\n" + str(bHour) + " (" + str(int(bHourWinrate)) + "%)"
+    axBestHour.text(0.5,0.5,bHourString,va='center',ha='center')
+    axBestHour.get_xaxis().set_visible(False)
+    axBestHour.get_yaxis().set_visible(False)
 
     # Saving and sending the file
     fig.savefig('fig1.png')
