@@ -19,17 +19,13 @@ async def addValue(message) :
     flagMVP = False
     flagPlayers = 0
 
-    if message.author.name == "Freakyguy" :
-        state = False
-        await message.channel.send("Erreur : Léo arrête ça je vais te pulver !")
-
     for player in players :
         if players.count(player) > 1 :
             state = False
             await message.channel.send("Erreur : Un joueur apparait plusieurs fois.")
             break
 
-    if player_count > 4 :
+    if player_count > 5 :
         state = False
         await message.channel.send("Erreur : Il y a trop de joueurs (max 5).")
 
