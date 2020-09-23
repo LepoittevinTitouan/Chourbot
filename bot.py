@@ -5,6 +5,8 @@ import discord
 import sqlite3
 from dotenv import load_dotenv
 
+import csstats
+
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
@@ -64,6 +66,9 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
+
+    if message.channel.name == "stats-cs":
+        await csstats.addValue(message)
 
     for command in commands:
         splitedString = message.content.split()

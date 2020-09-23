@@ -1,0 +1,57 @@
+{
+  maps : {
+    inferno : {
+      wins : [1,5],
+      looses : [],
+      ties : [],
+      mvps : ["Tits","Keynox"]
+    },
+    nuke : {
+      wins : [],
+      looses : [2,3],
+      ties : [],
+      mvps : ["Nyitus","Freakyguy"]
+    },
+    mirage : {
+      wins : []
+      looses : []
+      ties : [4]
+      mvps : ["Betaking"]
+    }
+  },
+
+  players : {
+    Tits : {
+      mvps : [1],
+      wins : [1,5],
+      looses : [2],
+      ties : [4]
+    },
+    Keynox : {
+      mvps : [5],
+      wins : [1,5],
+      looses : [3],
+      ties : [4]
+    },
+    Nyitus : {
+      mvps : [2],
+      wins : [1,5],
+      looses : [2,3],
+      ties : [4]
+    },
+    Freakyguy : {
+      mvps : [3],
+      wins : [1,5],
+      looses : [3],
+      ties : [4]
+    },
+    Betaking : {
+      mvps : [4],
+      wins : [],
+      looses : [2,3],
+      ties : [4]
+    }
+  },
+
+  games : 5
+}

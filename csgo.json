@@ -1,0 +1,125 @@
+{
+    "maps": {
+        "nuke": {
+            "wins": [
+                1
+            ],
+            "looses": [],
+            "ties": [],
+            "mvps": [
+                "Freakyguy"
+            ]
+        },
+        "inferno": {
+            "wins": [],
+            "looses": [
+                2
+            ],
+            "ties": [],
+            "mvps": [
+                "ReflexSNC"
+            ]
+        },
+        "mirage": {
+            "wins": [
+                3,
+                4
+            ],
+            "looses": [],
+            "ties": [],
+            "mvps": [
+                "ReflexSNC",
+                "ReflexSNC"
+            ]
+        }
+    },
+    "players": {
+        "Freakyguy": {
+            "mvps": [
+                1
+            ],
+            "wins": [
+                1,
+                3,
+                4
+            ],
+            "looses": [
+                2
+            ],
+            "ties": []
+        },
+        "Tits": {
+            "mvps": [],
+            "wins": [
+                1
+            ],
+            "looses": [],
+            "ties": []
+        },
+        "Nyitus": {
+            "mvps": [],
+            "wins": [
+                1,
+                3
+            ],
+            "looses": [
+                2
+            ],
+            "ties": []
+        },
+        "Coco": {
+            "mvps": [],
+            "wins": [
+                1,
+                3,
+                4
+            ],
+            "looses": [
+                2
+            ],
+            "ties": []
+        },
+        "ReflexSNC": {
+            "mvps": [
+                2,
+                3,
+                4
+            ],
+            "wins": [
+                3,
+                4
+            ],
+            "looses": [
+                2
+            ],
+            "ties": []
+        },
+        "Hacheur": {
+            "mvps": [],
+            "wins": [
+                3
+            ],
+            "looses": [
+                2
+            ],
+            "ties": []
+        },
+        "KeyNox": {
+            "mvps": [],
+            "wins": [
+                4
+            ],
+            "looses": [],
+            "ties": []
+        },
+        "22gus": {
+            "mvps": [],
+            "wins": [
+                4
+            ],
+            "looses": [],
+            "ties": []
+        }
+    },
+    "games": 4
+}
