@@ -31,7 +31,7 @@ async def addValue(message) :
                 await message.channel.send("Erreur : Un joueur apparait plusieurs fois.")
                 break
 
-        if player_count > 4 :
+        if player_count > 5 :
             state = False
             await message.channel.send("Erreur : Il y a trop de joueurs (max 5).")
 
