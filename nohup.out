@@ -1,6 +1,0 @@
-Unable to init server: Could not connect: Connection refused
-Unable to init server: Impossible de se connecter : Connection refused
-
-(bot.py:4300): Gdk-CRITICAL **: 00:51:50.572: gdk_cursor_new_for_display: assertion 'GDK_IS_DISPLAY (display)' failed
-
-(bot.py:4300): Gdk-CRITICAL **: 00:51:50.575: gdk_cursor_new_for_display: assertion 'GDK_IS_DISPLAY (display)' failed
