@@ -31,6 +31,12 @@
                 "ReflexSNC",
                 "ReflexSNC"
             ]
+        },
+        "cache": {
+            "wins": [],
+            "looses": [],
+            "ties": [],
+            "mvps": []
         }
     },
     "players": {
@@ -121,5 +127,5 @@
             "ties": []
         }
     },
-    "games": 4
+    "games": 7
 }

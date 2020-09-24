@@ -8,66 +8,68 @@ results = ["win","loose","tie"]
 
 async def addValue(message) :
     values = message.content.split()
-    # values = message.split()
-    map = values[0].lower()
-    result = values[1].lower()
-    mvp = values[2]
-    players = values[3].split(",")
-    player_count = len(players)
-
     state = True
-    flagMVP = False
-    flagPlayers = 0
 
-    if message.author.name == "Freakyguy" :
-        state = False
-        await message.channel.send("Erreur : Léo arrête ça je vais te pulver !")
-
-    for player in players :
-        if players.count(player) > 1 :
-            state = False
-            await message.channel.send("Erreur : Un joueur apparait plusieurs fois.")
-            break
-
-    if player_count > 4 :
-        state = False
-        await message.channel.send("Erreur : Il y a trop de joueurs (max 5).")
-
-    if map not in competmaps :
-        await message.channel.send("Erreur : Cette map n'existe pas ou n'est pas dans le map pool de la team pro CsGo Chourbe !")
+    if values[0] == "del" and values[1] not in results :
+        index = int(values[1])
+        await delValue(message,index)
         state = False
 
-    if result not in results :
-        await message.channel.send("Erreur : Le resultats doit etre parmis les suivants : Win, Loose, Tie.")
-        state = False
+    if state == True :
+        map = values[0].lower()
+        result = values[1].lower()
+        mvp = values[2]
+        players = values[3].split(",")
+        player_count = len(players)
 
-    for member in message.guild.members :
-        if (member.name.lower() == mvp.lower()) or (member.display_name.lower() == mvp.lower()) :
-            mvp = member.name
-            flagMVP = True
+        flagMVP = False
+        flagPlayers = 0
 
-    if not flagMVP :
-        state = False
-        await message.channel.send("Erreur : Le MVP n'est pas un joueur de CsGo.")
-
-    for i in range(len(players)) :
-        temp = players[i]
-        for member in message.guild.members :
-            if (member.name.lower() == players[i].lower() or member.display_name.lower() == players[i].lower()) :
-                temp = member.name
-                flagPlayers += 1
+        for player in players :
+            if players.count(player) > 1 :
+                state = False
+                await message.channel.send("Erreur : Un joueur apparait plusieurs fois.")
                 break
-        if temp != players[i] :
-                players[i] = temp
+
+        if player_count > 4 :
+            state = False
+            await message.channel.send("Erreur : Il y a trop de joueurs (max 5).")
+
+        if map not in competmaps :
+            await message.channel.send("Erreur : Cette map n'existe pas ou n'est pas dans le map pool de la team pro CsGo Chourbe !")
+            state = False
+
+        if result not in results :
+            await message.channel.send("Erreur : Le resultats doit etre parmis les suivants : Win, Loose, Tie.")
+            state = False
+
+        for member in message.guild.members :
+            if (member.name.lower() == mvp.lower()) or (member.display_name.lower() == mvp.lower()) :
+                mvp = member.name
+                flagMVP = True
+
+        if not flagMVP :
+            state = False
+            await message.channel.send("Erreur : Le MVP n'est pas un joueur de CsGo.")
+
+        for i in range(len(players)) :
+            temp = players[i]
+            for member in message.guild.members :
+                if (member.name.lower() == players[i].lower() or member.display_name.lower() == players[i].lower()) :
+                    temp = member.name
+                    flagPlayers += 1
+                    break
+            if temp != players[i] :
+                    players[i] = temp
 
 
-    if mvp not in players :
-        await message.channel.send("Erreur : Le MVP n'est pas parmis les joueurs O_o")
-        state = False
+        if mvp not in players :
+            await message.channel.send("Erreur : Le MVP n'est pas parmis les joueurs O_o")
+            state = False
 
-    if flagPlayers != player_count :
-        state = False
-        await message.channel.send("Erreur : Tout les joueurs n'ont pas été trouvés. ("+ str(players[flagPlayers])+")")
+        if flagPlayers != player_count :
+            state = False
+            await message.channel.send("Erreur : Tout les joueurs n'ont pas été trouvés. ("+ str(players[flagPlayers])+")")
 
     # Traitement terminé
     if state == True :
@@ -114,9 +116,50 @@ async def addValue(message) :
         with open('csgo.json','w') as outfile:
             json.dump(data,outfile,indent=4)
 
-        await message.channel.send("Nouvelle entrée :\nMap : " + str(map) + "\nResult : " + str(result) + "\nMVP : " + str(mvp) + "\nPlayers : " + str(players))
+        await message.channel.send("Nouvelle entrée :\nMap : " + str(map) + "\nResult : " + str(result) + "\nMVP : " + str(mvp) + "\nPlayers : " + str(players) + "\nGame ID : " + str(nb))
 
+async def delValue(message,id):
 
+    with open('csgo.json') as json_file:
+        data = json.load(json_file)
+
+    # Bot confirmation
+    mapFound = "None"
+    resultFound = "None"
+    mvpFound = "None"
+    playersFound = []
+
+    # Deleting from maps
+    for map in data["maps"] :
+        for result in data["maps"][map] :
+            if id in data["maps"][map][result] :
+                data["maps"][map][result].remove(id)
+                mapFound = map
+                resultFound = result
+                break
+
+    # Deleting from players
+    for player in data["players"] :
+        if id in data["players"][player]["mvps"] :
+            mvpFound = player
+            data["players"][player]["mvps"].remove(id)
+
+        for key in ["wins","looses","ties"] :
+            if id in data["players"][player][key] :
+                data["players"][player][key].remove(id)
+                playersFound.append(player)
+
+    # Removing the MVP
+    if mapFound != "None" and resultFound != "None" and mvpFound != "None":
+        data["maps"][mapFound]["mvps"].remove(mvpFound)
+
+        with open('csgo.json','w') as outfile:
+            json.dump(data,outfile,indent=4)
+
+        await message.channel.send("Game ID : " + str(id) + " has been removed.\nMap : " + str(mapFound) + "\nResult : " + str(resultFound) + "\nMVP : " + str(mvpFound) + "\nPlayers : " + str(playersFound))
+
+    else :
+        await message.channel.send("Game ID : " + str(id) + " already has been removed, or doesn't exist.")
 
 if __name__ == "__main__":
     # creating initial data
