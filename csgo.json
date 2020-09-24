@@ -2,71 +2,122 @@
     "maps": {
         "nuke": {
             "wins": [
-                1
+                1,
+                4,
+                11
             ],
             "looses": [],
             "ties": [],
             "mvps": [
-                "Freakyguy"
+                "Freakyguy",
+                "ReflexSNC",
+                "Betaking"
             ]
         },
         "inferno": {
-            "wins": [],
+            "wins": [
+                6,
+                8
+            ],
             "looses": [
-                2
+                2,
+                10
             ],
             "ties": [],
             "mvps": [
-                "ReflexSNC"
+                "ReflexSNC",
+                "Freakyguy",
+                "Freakyguy",
+                "Betaking"
             ]
         },
         "mirage": {
             "wins": [
                 3,
-                4
+                7,
+                9
             ],
-            "looses": [],
-            "ties": [],
+            "looses": [
+                5,
+                12
+            ],
+            "ties": [
+                13
+            ],
             "mvps": [
                 "ReflexSNC",
+                "Freakyguy",
+                "ReflexSNC",
+                "Nyitus",
+                "Freakyguy",
                 "ReflexSNC"
             ]
-        },
-        "cache": {
-            "wins": [],
-            "looses": [],
-            "ties": [],
-            "mvps": []
         }
     },
     "players": {
         "Freakyguy": {
             "mvps": [
-                1
+                1,
+                5,
+                6,
+                8,
+                12
             ],
             "wins": [
                 1,
                 3,
-                4
+                4,
+                6,
+                7,
+                8,
+                9,
+                11
             ],
             "looses": [
-                2
+                2,
+                5,
+                10,
+                12
             ],
-            "ties": []
+            "ties": [
+                13
+            ]
         },
-        "Tits": {
-            "mvps": [],
-            "wins": [
-                1
+        "ReflexSNC": {
+            "mvps": [
+                2,
+                3,
+                4,
+                7,
+                13
             ],
-            "looses": [],
-            "ties": []
-        },
-        "Nyitus": {
-            "mvps": [],
             "wins": [
                 1,
-                3
+                3,
+                4,
+                6,
+                7,
+                8,
+                9,
+                11
+            ],
+            "looses": [
+                2,
+                5,
+                10
+            ],
+            "ties": [
+                13
+            ]
+        },
+        "Nyitus": {
+            "mvps": [
+                9
+            ],
+            "wins": [
+                1,
+                3,
+                9
             ],
             "looses": [
                 2
@@ -78,27 +129,21 @@
             "wins": [
                 1,
                 3,
-                4
+                4,
+                6,
+                7,
+                8,
+                9,
+                11
             ],
             "looses": [
-                2
-            ],
-            "ties": []
-        },
-        "ReflexSNC": {
-            "mvps": [
                 2,
-                3,
-                4
+                5,
+                10
             ],
-            "wins": [
-                3,
-                4
-            ],
-            "looses": [
-                2
-            ],
-            "ties": []
+            "ties": [
+                13
+            ]
         },
         "Hacheur": {
             "mvps": [],
@@ -113,19 +158,46 @@
         "KeyNox": {
             "mvps": [],
             "wins": [
-                4
+                4,
+                6,
+                7,
+                8,
+                11
             ],
-            "looses": [],
-            "ties": []
+            "looses": [
+                5,
+                10
+            ],
+            "ties": [
+                13
+            ]
         },
         "22gus": {
             "mvps": [],
             "wins": [
                 4
             ],
-            "looses": [],
+            "looses": [
+                5
+            ],
             "ties": []
+        },
+        "Betaking": {
+            "mvps": [
+                10,
+                11
+            ],
+            "wins": [
+                9,
+                11
+            ],
+            "looses": [
+                10
+            ],
+            "ties": [
+                13
+            ]
         }
     },
-    "games": 7
+    "games": 13
 }
