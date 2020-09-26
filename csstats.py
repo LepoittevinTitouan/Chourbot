@@ -169,7 +169,7 @@ async def delValue(message,id):
     else :
         await message.channel.send("Game ID : " + str(id) + " already has been removed, or doesn't exist.")
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     # # Creating initial data
     # data = {}
     # data["maps"]={}
