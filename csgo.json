@@ -7,24 +7,20 @@
                 11,
                 16
             ],
-            "looses": [],
             "ties": [],
             "mvps": [
                 "Freakyguy",
                 "ReflexSNC",
                 "Betaking",
                 "KeyNox"
-            ]
+            ],
+            "losses": []
         },
         "inferno": {
             "wins": [
                 6,
                 8,
                 15
-            ],
-            "looses": [
-                2,
-                10
             ],
             "ties": [],
             "mvps": [
@@ -33,6 +29,10 @@
                 "Freakyguy",
                 "Betaking",
                 "Freakyguy"
+            ],
+            "losses": [
+                2,
+                10
             ]
         },
         "mirage": {
@@ -40,11 +40,6 @@
                 3,
                 7,
                 9
-            ],
-            "looses": [
-                5,
-                14,
-                17
             ],
             "ties": [
                 13
@@ -57,6 +52,11 @@
                 "ReflexSNC",
                 "Freakyguy",
                 "ReflexSNC"
+            ],
+            "losses": [
+                5,
+                14,
+                17
             ]
         }
     },
@@ -82,15 +82,15 @@
                 15,
                 16
             ],
-            "looses": [
+            "ties": [
+                13
+            ],
+            "losses": [
                 2,
                 5,
                 10,
                 14,
                 17
-            ],
-            "ties": [
-                13
             ]
         },
         "ReflexSNC": {
@@ -114,15 +114,15 @@
                 15,
                 16
             ],
-            "looses": [
+            "ties": [
+                13
+            ],
+            "losses": [
                 2,
                 5,
                 10,
                 14,
                 17
-            ],
-            "ties": [
-                13
             ]
         },
         "Nyitus": {
@@ -134,10 +134,10 @@
                 3,
                 9
             ],
-            "looses": [
+            "ties": [],
+            "losses": [
                 2
-            ],
-            "ties": []
+            ]
         },
         "Coco": {
             "mvps": [],
@@ -153,15 +153,15 @@
                 15,
                 16
             ],
-            "looses": [
+            "ties": [
+                13
+            ],
+            "losses": [
                 2,
                 5,
                 10,
                 14,
                 17
-            ],
-            "ties": [
-                13
             ]
         },
         "Hacheur": {
@@ -169,10 +169,10 @@
             "wins": [
                 3
             ],
-            "looses": [
+            "ties": [],
+            "losses": [
                 2
-            ],
-            "ties": []
+            ]
         },
         "KeyNox": {
             "mvps": [
@@ -187,14 +187,14 @@
                 15,
                 16
             ],
-            "looses": [
+            "ties": [
+                13
+            ],
+            "losses": [
                 5,
                 10,
                 14,
                 17
-            ],
-            "ties": [
-                13
             ]
         },
         "22gus": {
@@ -202,10 +202,10 @@
             "wins": [
                 4
             ],
-            "looses": [
+            "ties": [],
+            "losses": [
                 5
-            ],
-            "ties": []
+            ]
         },
         "Betaking": {
             "mvps": [
@@ -218,13 +218,13 @@
                 15,
                 16
             ],
-            "looses": [
+            "ties": [
+                13
+            ],
+            "losses": [
                 10,
                 14,
                 17
-            ],
-            "ties": [
-                13
             ]
         }
     },

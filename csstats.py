@@ -162,14 +162,26 @@ async def delValue(message,id):
         await message.channel.send("Game ID : " + str(id) + " already has been removed, or doesn't exist.")
 
 if __name__ == "__main__":
-    # creating initial data
-    data = {}
-    data["maps"]={}
-    data["players"]={}
-    data["games"]=0
-    with open('csgo.json', 'w') as outfile:
-        json.dump(data, outfile,indent=4)
+    # # Creating initial data
+    # data = {}
+    # data["maps"]={}
+    # data["players"]={}
+    # data["games"]=0
+    # with open('csgo.json', 'w') as outfile:
+    #     json.dump(data, outfile,indent=4)
 
     # # Testing to add data
     # message = "inferno loose Betaking Tits,Nyitus,Keynox,Betaking"
     # addValue(message)
+
+    # # Refactoring looses to losses
+    # with open('csgo.json') as json_file:
+    #     data = json.load(json_file)
+    #
+    # list = ["maps","players"]
+    # for key1 in list :
+    #     for key2 in data[key1] :
+    #         data[key1][key2]["losses"] = data[key1][key2].pop("looses")
+    #
+    # with open('csgo.json', 'w') as outfile:
+    #     json.dump(data, outfile,indent=4)
