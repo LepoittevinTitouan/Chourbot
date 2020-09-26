@@ -3,6 +3,8 @@ import os
 import asyncio
 import json
 
+import test
+
 competmaps = ["mirage","inferno","overpass","vertigo","nuke","train","dust2","cache"]
 results = ["win","loose","tie"]
 
@@ -19,6 +21,9 @@ async def call(message) :
             await message.channel.send("Erreur de formatage : Trop de paramètres\nLe format est : Map Resultat MVP Player1,Player2,...")
         else :
             await message.channel.send("Erreur de formatage : Pas assez de paramètres\nLe format est : Map Resultat MVP Player1,Player2,...")
+
+    elif values[0] == "stats" :
+        await test.stats(message)
 
 async def addValue(message) :
     values = message.content.split()
