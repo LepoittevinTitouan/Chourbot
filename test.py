@@ -59,4 +59,4 @@ async def stats(message) :
     				mmvp += unique_mvps[i]
 
     		#display
-    		await message.channel.send(str(m) + "  " + str(winrate) + "% de winrate. MVP: " + mmvp + ' (' + str(int(round((max_mvps/number_of_game)*100))) + '%)')
+    		await message.channel.send(str(m) + "  " + str(winrate) + "% de winrate sur " + str(number_of_game) + " parties. Most Valuable MVP : " + mmvp + ' (' + str(int(round((max_mvps/number_of_game)*100))) + '%)')
