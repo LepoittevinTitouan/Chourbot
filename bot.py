@@ -68,7 +68,7 @@ async def on_message(message):
         return
 
     if message.channel.name == "stats-cs":
-        await csstats.addValue(message)
+        await csstats.call(message)
 
     for command in commands:
         splitedString = message.content.split()
