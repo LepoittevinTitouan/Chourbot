@@ -82,7 +82,10 @@ async def plot3s(data,message):
     #Limitation du nombre de données
     data = data.loc[data["Playlist"] == "Standard"]
     data = data.loc[data["Ranked"] == 1]
-    data.tail(50)
+
+    if len(message.content.split()) > 2 :
+        dt = datetime.strptime(message.content.split()[2], '%Y-%m-%d')
+        data = data.loc[data["Timestamp"] > dt]
 
     if data.empty :
         await message.channel.send("No game played in 3s in " + str(message.author) + "' saved file.")
@@ -123,12 +126,16 @@ async def plot3s(data,message):
         total = sum(myList)
         sizes.append(total)
 
+
     # Winrate + win/loose
     winrate = data["Win"].mean()
     winrate = winrate * 100
     win = data["Win"].sum()
     loose = (win * 100 / winrate) - win
     nb = win + loose
+
+    goalsTot = sum(data['Goals'].tolist())/nb
+    savesTot = sum(data['Saves'].tolist())/nb
 
     #Affichage %MVP
     mvpMean = data["MVP"].mean()
@@ -199,8 +206,14 @@ async def plot3s(data,message):
     axLoose.text(0.5,0.5,loosNb,va='center',ha='center')
     axLoose.axis("off")
 
+    # Annotation nombre goals shots
+    axTot = fig.add_subplot(gs[3,4:6])
+    goalsSavesTot = "Total Goals : " + str(round(goalsTot,2)) + "\nTotal Saves : " + str(round(savesTot,2))
+    axTot.text(0.5,0.5,goalsSavesTot,va='center',ha='center')
+    axTot.axis("off")
+
     # Annotation nb de parties
-    axNb = fig.add_subplot(gs[3:5,4:6])
+    axNb = fig.add_subplot(gs[4,4:6])
     nbParties = str(int(nb)) + "\nParties jouées"
     axNb.text(0.5,0.5,nbParties,va='center',ha='center')
     axNb.axis("off")
@@ -241,7 +254,10 @@ async def plot2s(data,message):
     #Limitation du nombre de données
     data = data.loc[data["Playlist"] == "Doubles"]
     data = data.loc[data["Ranked"] == 1]
-    data.tail(50)
+
+    if len(message.content.split()) > 2 :
+        dt = datetime.strptime(message.content.split()[2], '%Y-%m-%d')
+        data = data.loc[data["Timestamp"] > dt]
 
     if data.empty :
         await message.channel.send("No game played in 2s in " + str(message.author) + "' saved file.")
@@ -288,6 +304,9 @@ async def plot2s(data,message):
     win = data["Win"].sum()
     loose = (win * 100 / winrate) - win
     nb = win + loose
+
+    goalsTot = sum(data['Goals'].tolist())/nb
+    savesTot = sum(data['Saves'].tolist())/nb
 
     #Affichage %MVP
     mvpMean = data["MVP"].mean()
@@ -358,8 +377,14 @@ async def plot2s(data,message):
     axLoose.text(0.5,0.5,loosNb,va='center',ha='center')
     axLoose.axis("off")
 
+    # Annotation nombre goals shots
+    axTot = fig.add_subplot(gs[3,4:6])
+    goalsSavesTot = "Total Goals : " + str(round(goalsTot,2)) + "\nTotal Saves : " + str(round(savesTot,2))
+    axTot.text(0.5,0.5,goalsSavesTot,va='center',ha='center')
+    axTot.axis("off")
+
     # Annotation nb de parties
-    axNb = fig.add_subplot(gs[3:5,4:6])
+    axNb = fig.add_subplot(gs[4,4:6])
     nbParties = str(int(nb)) + "\nParties jouées"
     axNb.text(0.5,0.5,nbParties,va='center',ha='center')
     axNb.axis("off")
