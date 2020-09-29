@@ -56,6 +56,10 @@ async def plotRecap(data,message):
     mmr2s = mmr2s.loc[mmr2s["MMR"] > 200]
     mmr2s = mmr2s["MMR"].tolist()
 
+    mmr1s = data.loc[data["Playlist"] == "Duel"]
+    mmr1s = mmr1s.loc[mmr1s["MMR"] > 200]
+    mmr1s = mmr1s["MMR"].tolist()
+
     fig = plt.figure()
     ax = plt.axes()
 
@@ -64,7 +68,8 @@ async def plotRecap(data,message):
     ax.tick_params(axis='y')
 
     line1, = ax.plot(mmr3s, label = "3s",zorder = 10,color = "red")
-    line2, = ax.plot(mmr2s, label = "2s")
+    line2, = ax.plot(mmr2s, label = "2s",zorder = 5)
+    line3, = ax.plot(mmr1s, label = "1s",color = "green")
 
     fig.tight_layout()
 
@@ -75,7 +80,7 @@ async def plotRecap(data,message):
     file = discord.File('fig1.png')
     embed = discord.Embed()
     embed.set_image(url="attachment://fig1.png")
-    await message.channel.send("Précision en spécifiant '2s' ou '3s' dans la commande !")
+    await message.channel.send("Précision en spécifiant '3s','2s' ou '1s' dans la commande !")
     await message.channel.send(file=file,embed=embed)
 
 async def plot3s(data,message):
