@@ -38,6 +38,8 @@ async def call(message,guild) :
             await plot2s(data,message)
         elif "1s" in message.content :
             await plot1s(data,message)
+        elif "extra" in message.content :
+            await plotRecapExtra(data,message)
         else :
             await plotRecap(data,message)
 
@@ -81,6 +83,47 @@ async def plotRecap(data,message):
     embed = discord.Embed()
     embed.set_image(url="attachment://fig1.png")
     await message.channel.send("Précision en spécifiant '3s','2s' ou '1s' dans la commande !")
+    await message.channel.send(file=file,embed=embed)
+
+async def plotRecapExtra(data,message):
+
+    data = data.loc[data["Ranked"] == 1]
+    if data.empty :
+        await message.channel.send("No available data in " + str(message.author) + "' saved file.")
+        return
+
+    mmrR = data.loc[data["Playlist"] == "Rumble"]
+    mmrR = mmrR.loc[mmrR["MMR"] > 200]
+    mmrR = mmrR["MMR"].tolist()
+
+    mmrD = data.loc[data["Playlist"] == "Dropshot"]
+    mmrD = mmrD.loc[mmrD["MMR"] > 200]
+    mmrD = mmrD["MMR"].tolist()
+
+    mmrH = data.loc[data["Playlist"] == "Duel"]
+    mmrH = mmrH.loc[mmrH["MMR"] > 200]
+    mmrH = mmrH["MMR"].tolist()
+
+    fig = plt.figure()
+    ax = plt.axes()
+
+    ax.set_xlabel('Nombre de parties')
+    ax.set_ylabel('MMR')
+    ax.tick_params(axis='y')
+
+    line1, = ax.plot(mmrR, label = "Rumble",zorder = 10,color = "red")
+    line2, = ax.plot(mmrD, label = "Dropshot",zorder = 5)
+    line3, = ax.plot(mmrH, label = "Hoops",color = "green")
+
+    fig.tight_layout()
+
+    ax.legend()
+
+    fig.savefig('fig1.png')
+
+    file = discord.File('fig1.png')
+    embed = discord.Embed()
+    embed.set_image(url="attachment://fig1.png")
     await message.channel.send(file=file,embed=embed)
 
 async def plot3s(data,message):
