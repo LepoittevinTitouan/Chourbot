@@ -100,7 +100,7 @@ async def plotRecapExtra(data,message):
     mmrD = mmrD.loc[mmrD["MMR"] > 200]
     mmrD = mmrD["MMR"].tolist()
 
-    mmrH = data.loc[data["Playlist"] == "Duel"]
+    mmrH = data.loc[data["Playlist"] == "Hoops"]
     mmrH = mmrH.loc[mmrH["MMR"] > 200]
     mmrH = mmrH["MMR"].tolist()
 
