@@ -215,7 +215,7 @@ async def plot3s(data,message):
 
     # Annotation nombre goals shots
     axTot = fig.add_subplot(gs[3,4:6])
-    goalsSavesTot = "Total Goals : " + str(round(goalsTot,2)) + "\nTotal Saves : " + str(round(savesTot,2))
+    goalsSavesTot = "Goals : " + str(round(goalsTot,2)) + "/game\nSaves : " + str(round(savesTot,2) + "/game")
     axTot.text(0.5,0.5,goalsSavesTot,va='center',ha='center')
     axTot.axis("off")
 
@@ -386,7 +386,7 @@ async def plot2s(data,message):
 
     # Annotation nombre goals shots
     axTot = fig.add_subplot(gs[3,4:6])
-    goalsSavesTot = "Total Goals : " + str(round(goalsTot,2)) + "\nTotal Saves : " + str(round(savesTot,2))
+    goalsSavesTot = "Goals : " + str(round(goalsTot,2)) + "/game\nSaves : " + str(round(savesTot,2) + "/game")
     axTot.text(0.5,0.5,goalsSavesTot,va='center',ha='center')
     axTot.axis("off")
 
@@ -469,7 +469,7 @@ async def plot1s(data,message):
             prec = i
 
     #Préparation du pie chart
-    labels = 'Goals','Saves','Assists'
+    labels = 'Goals','Saves'
     sizes =[]
     for l in labels :
         myList = data[l].tolist()
@@ -550,7 +550,7 @@ async def plot1s(data,message):
 
     # Annotation nombre goals shots
     axTot = fig.add_subplot(gs[3,4:6])
-    goalsSavesTot = "Total Goals : " + str(round(goalsTot,2)) + "\nTotal Saves : " + str(round(savesTot,2))
+    goalsSavesTot = "Goals : " + str(round(goalsTot,2)) + "/game\nSaves : " + str(round(savesTot,2) + "/game")
     axTot.text(0.5,0.5,goalsSavesTot,va='center',ha='center')
     axTot.axis("off")
 
