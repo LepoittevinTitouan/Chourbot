@@ -1,26 +1,4 @@
 [{
-
-    "name":"Random",
-    "description":"Change l'ordre des lettres dans le pseudo de l'utilisateur passé en parametre. Il n'est pas nécessaire de tag la personne, ecrire le pseudo suffit. La casse n'est pas prise en compte",
-    "examples":["$random @Nyitus" , "$random nyitus"],
-    "callback":"randomNickname",
-    "code":"$random"
-  },
-  {
-    "name":"Reset",
-    "description":"Reset le pseudo de l'utilisateur passé en parametre à la valeur enregistrer dans la BDD. Il n'est pas nécessaire de tag la personne, ecrire le pseudo suffit. La casse n'est pas prise en compte",
-    "examples":["$reset Ttis", "$reset @Tits"],
-    "callback":"resetNickname",
-    "code":"$reset"
-  },
-  {
-    "name":"Set",
-    "description":"Set le pseudo de l'utilisateur passé en parametre avec le deuxieme parametre. Il n'est pas nécessaire de tag la personne, ecrire le pseudo suffit. La casse n'est pas prise en compte",
-    "examples":["$set PseudoActuel NouveauPseudo"],
-    "callback":"setNickname",
-    "code":"$set"
-  },
-  {
     "name":"Heeeeeeeeiiiin",
     "description":"HEEEEEEEEEEEEEEEEEEEEEEEEIIIIIIIIIIIIIIIIIIIIINNNNNNNNNNNNNN",
     "examples":["$hein","$hein @Nyitus","$hein all"],
@@ -28,31 +6,9 @@
     "code":"$hein"
   },
   {
-    "name":"Update Database",
-    "description":"Enregistre les pseudos actuel dans la base de donnée. Attention, les anciennes données sont écrasée",
-    "examples":["$updateDB"],
-    "callback":"updateDB",
-    "code":"$updateDB"
-  },
-  {
-    "name":"Reset from Database",
-    "description":"Reset tout les pseudos avec les noms enregistrés dans la BDD",
-    "examples":["$resetAll"],
-    "callback":"resetFromDB",
-    "code":"$resetAll"
-  },
-  {
     "name":"Help command",
     "description":"HEEEEEEEEEEEEELP",
     "examples":["$help"],
     "callback":"help",
     "code":"$help"
-  },
-  {
-    "name":"Rocket League stats",
-    "description":"Simple test for RL stats display",
-    "examples":["$help"],
-    "callback":"stats",
-    "code":"$rl"
-  }
-]
+  }]
