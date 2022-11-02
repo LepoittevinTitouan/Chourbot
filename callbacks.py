@@ -1,7 +1,6 @@
 import json
 import random
 import discord
-import sqlite3
 import time
 
 
@@ -13,7 +12,7 @@ async def hein(message, guild):
         msg = '<:Heeee:723830564104437841> <:eeee:723833827390128140> <:eeee:723833827390128140> <:eeee:723833827390128140> <:ein:723833854703697921>'.format(
             message)
         await message.delete()
-        await message.channel.send(msg, delete_after=30)
+        await message.channel.send(msg)
 
 
     else:

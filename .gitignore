@@ -1,2 +1,5 @@
 *.out
 .env
+tmScraper/settings.py
+.idea
+venv

@@ -1,0 +1,60 @@
+{
+    "maxId": 12,
+    "playlist": [
+        {
+            "name": "Bercy Meaucoup",
+            "id": 0,
+            "mapUid": "Kkfgf2KbEQYdCekN85nCKu0nH04"
+        },
+        {
+            "name": "Roue Cool",
+            "id": 1,
+            "mapUid": "0uGFterj66Bo78agrAjLsWNdnP"
+        },
+        {
+            "name": "R\u00c3\u00a2le Cube",
+            "id": 3,
+            "mapUid": "olWvRdD6fHKpa7dU70QuW4w1yy5"
+        },
+        {
+            "name": "CHICADRENBOISINENFER",
+            "id": 4,
+            "mapUid": "3m4MCoA2d9FPr92_r2wA11pV1sg"
+        },
+        {
+            "name": "Larma Les Retours",
+            "id": 5,
+            "mapUid": "47ZCDBjVvjxWA4NR48m6JixO2gf"
+        },
+        {
+            "name": "Better Ice (Mythic Edition)",
+            "id": 6,
+            "mapUid": "Zx2NUUUnm8kRWXyUZxkm2IoxId9"
+        },
+        {
+            "name": "Saut Long et Bosse-Air",
+            "id": 7,
+            "mapUid": "CngP5sDzFhjZb3zdblRQm42nnr5"
+        },
+        {
+            "name": "niatnuoM ecapS",
+            "id": 8,
+            "mapUid": "ZbMbzkhRCW4Tf8OyHYEV7_bRFx0"
+        },
+        {
+            "name": "Z|Place",
+            "id": 9,
+            "mapUid": "2FiDNtFO4WMD_iWgFtVyEiXpLfl"
+        },
+        {
+            "name": "Bercy A Toit",
+            "id": 10,
+            "mapUid": "T14AiBelhJ0yoxOi8iONvU3rmI6"
+        },
+        {
+            "name": "Dune Not Finish",
+            "id": 11,
+            "mapUid": "x4R9DsTQTo2prEsXA0O9Q3sGSRb"
+        }
+    ]
+}
